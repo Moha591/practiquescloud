@@ -1,0 +1,154 @@
+<mxfile host="app.diagrams.net" agent="OpenCode" version="24.7.17">
+  <diagram id="pt1-4-ex1-topologia" name="Topología">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Título -->
+        <mxCell id="title" value="Topología de red — Ejercicio 1" style="text;html=1;align=left;verticalAlign=middle;fontSize=30;fontStyle=1;fontColor=#16202A;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="24" width="900" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="2 instancias EC2 con Terraform  ·  Amazon Linux 2023  ·  t3.micro  ·  región us-east-1" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontColor=#5A6B7B;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="70" width="1000" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="badge" value="PT1-4 · EX1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FFCD8C;fontColor=#C46E00;fontStyle=1;fontSize=13;fontFamily=Helvetica;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="30" width="170" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- Internet -->
+        <mxCell id="internet" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#BED6F0;strokeWidth=1.4;arcSize=14;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="105" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="internet_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet;fillColor=#2F6FB0;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="696" y="128" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="internet_name" value="Internet" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#16202A;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="760" y="124" width="150" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="internet_sub" value="tráfico externo" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#5A6B7B;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="760" y="154" width="150" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- AWS Cloud -->
+        <mxCell id="cloud" value="&lt;b style='font-size:22px'&gt;AWS Cloud&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:14px;color:#5A6B7B'&gt;Región us-east-1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=30;spacingTop=14;arcSize=3;fontFamily=Helvetica;fontColor=#16202A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="245" width="1400" height="730" as="geometry" />
+        </mxCell>
+
+        <!-- VPC -->
+        <mxCell id="vpc" value="&lt;b style='font-size:19px'&gt;VPC por defecto&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:13px'&gt;172.31.0.0/16&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=12 7;fillColor=#EAF2FB;strokeColor=#2F6FB0;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=25;spacingTop=12;arcSize=3;fontFamily=Helvetica;fontColor=#1B4F86;" vertex="1" parent="1">
+          <mxGeometry x="180" y="350" width="1240" height="590" as="geometry" />
+        </mxCell>
+
+        <!-- Internet Gateway -->
+        <mxCell id="igw" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3EEFF;strokeColor=#7B61FF;strokeWidth=1.6;arcSize=16;" vertex="1" parent="1">
+          <mxGeometry x="690" y="315" width="220" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="igw_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet_gateway;fillColor=#8C4FFF;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="708" y="329" width="44" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="igw_text" value="&lt;b style='font-size:15px;color:#4630A0'&gt;Internet Gateway&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:12px;color:#6E5ABE'&gt;IGW&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="762" y="323" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Tabla de rutas -->
+        <mxCell id="rt" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6FB0;strokeWidth=1.6;arcSize=14;" vertex="1" parent="1">
+          <mxGeometry x="260" y="430" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rt_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_table;fillColor=#2F6FB0;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="278" y="448" width="44" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="rt_text" value="&lt;b style='font-size:16px;color:#1B4F86'&gt;Tabla de rutas&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:12px;color:#1B4F86'&gt;0.0.0.0/0 → IGW&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="334" y="438" width="230" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Subnet -->
+        <mxCell id="subnet" value="&lt;b style='font-size:18px'&gt;Subred pública (por defecto)&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:13px'&gt;172.31.0.0/20  ·  us-east-1a&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=11 7;fillColor=#E7F7EE;strokeColor=#1F8A4C;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=25;spacingTop=10;arcSize=3;fontFamily=Helvetica;fontColor=#156939;" vertex="1" parent="1">
+          <mxGeometry x="240" y="560" width="1120" height="350" as="geometry" />
+        </mxCell>
+
+        <!-- Security Group -->
+        <mxCell id="sg" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 6;fillColor=#FFFDF5;strokeColor=#B7791F;strokeWidth=1.8;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="310" y="636" width="980" height="254" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;fillColor=#B7791F;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="322" y="644" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_label" value="Grupo de seguridad por defecto  ·  sin reglas de entrada" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#8A5A00;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="354" y="643" width="900" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- Instancia 1 -->
+        <mxCell id="ec2a" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2.2;arcSize=14;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="686" width="380" height="186" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2a_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="384" y="710" width="64" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2a_text" value="&lt;b style='font-size:21px'&gt;instanciauno&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:14px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:13px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:12px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:12px;color:#5A6B7B'&gt;IP pública automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontFamily=Helvetica;spacing=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="464" y="702" width="260" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Instancia 2 -->
+        <mxCell id="ec2b" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2.2;arcSize=14;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="686" width="380" height="186" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2b_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="884" y="710" width="64" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2b_text" value="&lt;b style='font-size:21px'&gt;instanciados&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:14px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:13px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:12px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:12px;color:#5A6B7B'&gt;IP pública automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontFamily=Helvetica;spacing=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="964" y="702" width="260" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Flechas -->
+        <mxCell id="e_internet_igw" value="tráfico" style="edgeStyle=none;rounded=0;html=1;strokeColor=#5A6B7B;strokeWidth=2.4;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=#F7F9FC;fontSize=11;fontColor=#5A6B7B;fontFamily=Helvetica;" edge="1" parent="1" source="internet" target="igw">
+          <mxGeometry x="0" y="-38" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_igw_rt" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5A6B7B;strokeWidth=2.4;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="igw" target="rt">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="351" />
+              <mxPoint x="620" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_rt_subnet" value="ruta" style="edgeStyle=none;rounded=0;html=1;strokeColor=#5A6B7B;strokeWidth=2.4;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.16;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=#F7F9FC;fontSize=11;fontColor=#5A6B7B;fontFamily=Helvetica;" edge="1" parent="1" source="rt" target="subnet">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Etiquetas de flujo -->
+        <mxCell id="lbl_route" value="0.0.0.0/0" style="text;html=1;align=left;verticalAlign=middle;fontFamily=monospace;fontSize=11;fontColor=#5A6B7B;" vertex="1" parent="1">
+          <mxGeometry x="628" y="386" width="90" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Leyenda -->
+        <mxCell id="legend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D9E2EC;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1000" width="1400" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sw1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=1.5;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="130" y="1026" width="28" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_t1" value="Creado por Terraform (2 instancias EC2)" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#16202A;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="172" y="1026" width="360" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sw2" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=4 3;fillColor=#FFFFFF;strokeColor=#5A6B7B;strokeWidth=1.2;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="590" y="1026" width="28" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_t2" value="Infraestructura por defecto de AWS (no gestionada)" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#16202A;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="632" y="1026" width="420" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_arrow" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#5A6B7B;strokeWidth=2.2;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1128" y="1038" as="sourcePoint" />
+            <mxPoint x="1176" y="1038" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_t3" value="Flujo de red" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#16202A;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="1026" width="200" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
