@@ -34,12 +34,6 @@ variable "key_name" {
   default     = "labuser"
 }
 
-variable "ssh_cidr" {
-  description = "CIDR autorizado para SSH (IP pública del alumno con /32)."
-  type        = string
-  default     = "81.42.248.211/32"
-}
-
 variable "subnets" {
   description = "Mapa de subredes: clave, CIDR y nombre lógico."
   type = map(object({

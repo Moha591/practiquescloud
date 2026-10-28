@@ -28,7 +28,8 @@ resource "aws_vpc" "this" {
 }
 
 # ---------------------------------------------------------------------------
-# Subredes: las tres comparten la misma zona de disponibilidad (us-east-1a)
+# Subredes privadas: las tres comparten la misma zona de disponibilidad
+# (us-east-1a). No se asigna IP pública automática.
 # ---------------------------------------------------------------------------
 resource "aws_subnet" "this" {
   for_each = var.subnets
@@ -36,7 +37,7 @@ resource "aws_subnet" "this" {
   vpc_id                  = aws_vpc.this.id
   cidr_block              = each.value.cidr_block
   availability_zone       = var.availability_zone
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 
   tags = {
     Name    = "pt1-4-ex2-${each.value.name}"
@@ -46,41 +47,8 @@ resource "aws_subnet" "this" {
 }
 
 # ---------------------------------------------------------------------------
-# Salida a Internet: IGW + tabla de rutas pública
-# ---------------------------------------------------------------------------
-resource "aws_internet_gateway" "this" {
-  vpc_id = aws_vpc.this.id
-
-  tags = {
-    Name    = "pt1-4-ex2-igw"
-    Project = "pt1-4-ex2"
-  }
-}
-
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.this.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.this.id
-  }
-
-  tags = {
-    Name    = "pt1-4-ex2-rt-public"
-    Project = "pt1-4-ex2"
-  }
-}
-
-resource "aws_route_table_association" "this" {
-  for_each = aws_subnet.this
-
-  subnet_id      = each.value.id
-  route_table_id = aws_route_table.public.id
-}
-
-# ---------------------------------------------------------------------------
-# Par de claves para SSH. La clave privada (labuser.pem) se genera localmente
-# y no se versiona; aquí solo se importa la clave pública.
+# Par de claves para futuras prácticas. La clave privada (labuser.pem) se
+# genera localmente y no se versiona; aquí solo se importa la clave pública.
 # ---------------------------------------------------------------------------
 resource "aws_key_pair" "this" {
   key_name   = var.key_name
@@ -94,20 +62,12 @@ resource "aws_key_pair" "this" {
 
 # ---------------------------------------------------------------------------
 # Grupo de seguridad común a las 6 instancias.
-# Permite SSH únicamente desde la IP indicada en ssh_cidr.
+# Sin reglas de entrada: las instancias no son accesibles desde Internet.
 # ---------------------------------------------------------------------------
 resource "aws_security_group" "this" {
   name        = "pt1-4-ex2-sg"
-  description = "Security group del ejercicio 2: SSH desde la IP autorizada"
+  description = "Security group del ejercicio 2: sin reglas de entrada"
   vpc_id      = aws_vpc.this.id
-
-  ingress {
-    description = "SSH desde la IP autorizada"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.ssh_cidr]
-  }
 
   egress {
     from_port   = 0
@@ -123,7 +83,7 @@ resource "aws_security_group" "this" {
 }
 
 # ---------------------------------------------------------------------------
-# 6 instancias EC2: 2 por cada subred
+# 6 instancias EC2: 2 por cada subred, sin IP pública
 # ---------------------------------------------------------------------------
 locals {
   instances = {
@@ -144,7 +104,7 @@ resource "aws_instance" "this" {
   subnet_id                   = aws_subnet.this[each.value].id
   vpc_security_group_ids      = [aws_security_group.this.id]
   key_name                    = aws_key_pair.this.key_name
-  associate_public_ip_address = true
+  associate_public_ip_address = false
 
   tags = {
     Name    = "pt1-4-ex2-${each.key}"

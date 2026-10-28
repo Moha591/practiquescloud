@@ -32,16 +32,6 @@ output "key_name" {
   value       = aws_key_pair.this.key_name
 }
 
-output "internet_gateway_id" {
-  description = "ID de la puerta de enlace de Internet (IGW) de la VPC."
-  value       = aws_internet_gateway.this.id
-}
-
-output "route_table_id" {
-  description = "ID de la tabla de rutas pública."
-  value       = aws_route_table.public.id
-}
-
 output "instance_ids" {
   description = "IDs de las 6 instancias EC2, indexados por nombre."
   value = {
@@ -56,20 +46,12 @@ output "instance_private_ips" {
   }
 }
 
-output "instance_public_ips" {
-  description = "IPs públicas de las 6 instancias, indexadas por nombre."
-  value = {
-    for name, instance in aws_instance.this : name => instance.public_ip
-  }
-}
-
 output "instance_summary" {
-  description = "Resumen de cada instancia: ID, IPs, subred, estado y tipo."
+  description = "Resumen de cada instancia: ID, IP privada, subred, estado y tipo."
   value = {
     for name, instance in aws_instance.this : name => {
       id         = instance.id
       private_ip = instance.private_ip
-      public_ip  = instance.public_ip
       subnet_id  = instance.subnet_id
       state      = instance.instance_state
       type       = instance.instance_type
