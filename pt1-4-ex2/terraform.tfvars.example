@@ -3,6 +3,8 @@ availability_zone = "us-east-1a"
 vpc_cidr          = "10.0.0.0/16"
 ami_id            = "ami-04b938437b69a2c9c"
 instance_type     = "t3.micro"
+key_name          = "labuser"
+ssh_cidr          = "81.42.248.211/32"
 
 subnets = {
   A = {

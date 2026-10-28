@@ -24,3 +24,6 @@ terraform.rc
 # Sistema operativo / editor
 .DS_Store
 Thumbs.db
+
+# Clave privada local
+*.pem
