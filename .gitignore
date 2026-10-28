@@ -1,0 +1,105 @@
+# ---------------------------------------------------------------------------
+# Credenciales y secretos
+# No versionar claves privadas, credenciales de AWS ni variables de entorno.
+# ---------------------------------------------------------------------------
+.aws/
+**/.aws/
+.azure/
+**/.azure/
+.config/gcloud/
+**/.config/gcloud/
+.kube/
+**/.kube/
+
+.env
+.env.*
+!.env.example
+
+credentials
+credentials.*
+**/credentials
+**/credentials.*
+
+secrets/
+secrets.*
+*.secret
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+
+# ---------------------------------------------------------------------------
+# Terraform: estado, planes, proveedores descargados y configuración local
+# ---------------------------------------------------------------------------
+**/.terraform/
+**/.terraform.d/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+plan.out
+*.plan
+crash.log
+crash.*.log
+
+# Variables locales con posibles secretos; sí se versiona el ejemplo
+*.tfvars
+*.auto.tfvars
+!*.tfvars.example
+
+# Archivos de override locales
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Configuración local del CLI de Terraform
+.terraformrc
+terraform.rc
+
+# ---------------------------------------------------------------------------
+# Archivos pesados, comprimidos y temporales
+# ---------------------------------------------------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.iso
+*.dmg
+*.exe
+*.msi
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.cache
+.cache/
+
+# ---------------------------------------------------------------------------
+# Sistema operativo, editores y entornos locales
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+.fleet/
+*.swp
+*.swo
+*~
+
+# Dependencias y cachés de desarrollo
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
