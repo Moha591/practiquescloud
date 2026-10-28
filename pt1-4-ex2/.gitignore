@@ -1,0 +1,26 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+
+# Variables locales (no versionar secrets)
+*.tfvars
+!*.tfvars.example
+
+# Archivos de override locales
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Configuración local del CLI
+.terraformrc
+terraform.rc
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db

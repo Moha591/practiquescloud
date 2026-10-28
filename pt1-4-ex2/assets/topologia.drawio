@@ -1,0 +1,145 @@
+<mxfile host="app.diagrams.net" agent="OpenCode" version="24.7.17">
+  <diagram id="pt1-4-ex2-topologia" name="Topología">
+    <mxGraphModel dx="1600" dy="1150" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Topología de red — Ejercicio 2" style="text;html=1;align=left;verticalAlign=middle;fontSize=30;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="24" width="900" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="VPC 10.0.0.0/16 · 3 subredes en us-east-1a · 6 instancias EC2 t3.micro" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontColor=#5A6B7B;fontFamily=Helvetica;fontStyle=0;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="70" width="1100" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="badge" value="PT1-4 · EX2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FFCD8C;fontColor=#C46E00;fontStyle=1;fontSize=13;fontFamily=Helvetica;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="30" width="170" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud" value="&lt;b style='font-size:22px'&gt;AWS Cloud&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:14px;color:#5A6B7B'&gt;Región us-east-1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=30;spacingTop=14;arcSize=3;fontFamily=Helvetica;fontColor=#16202A;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="130" width="1440" height="930" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" value="&lt;b style='font-size:19px'&gt;VPC pt1-4-ex2&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:13px'&gt;10.0.0.0/16&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px'&gt;DNS support + hostnames activados&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=12 7;fillColor=#EAF2FB;strokeColor=#2F6FB0;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=25;spacingTop=12;arcSize=3;fontFamily=Helvetica;fontColor=#1B4F86;" vertex="1" parent="1">
+          <mxGeometry x="130" y="215" width="1340" height="820" as="geometry" />
+        </mxCell>
+        <mxCell id="az" value="&lt;b style='font-size:16px'&gt;Zona de disponibilidad us-east-1a&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=10 6;fillColor=none;strokeColor=#7B61FF;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=25;spacingTop=12;arcSize=3;fontFamily=Helvetica;fontColor=#4630A0;" vertex="1" parent="1">
+          <mxGeometry x="170" y="310" width="1260" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="sg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDF5;strokeColor=#DCB478;strokeWidth=1;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="915" y="318" width="493" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_icon" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.security_group;fillColor=#B7791F;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="930" y="323" width="24" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_label" value="Security Group pt1-4-ex2-sg  ·  sin reglas de entrada" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#8A5A00;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="955" y="320" width="440" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_A" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E7F7EE;strokeColor=#1F8A4C;strokeWidth=1.8;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="375" width="360" height="550" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_A_label" value="&lt;b style='font-size:19px'&gt;Subred A&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:14px'&gt;10.0.32.0/25&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px'&gt;128 direcciones · 123 usables&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=19;fontColor=#156939;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="387" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_A_badge" value="2 EC2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F8A4C;strokeColor=#1F8A4C;fontColor=#FFFFFF;fontStyle=1;fontSize=10;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="485" y="393" width="55" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_ec2-a-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2;arcSize=7;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="216" y="480" width="328" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="icon_ec2-a-1" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="234" y="498" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="text_ec2-a-1" value="&lt;b style='font-size:18px'&gt;ec2-a-1&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:12px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:10px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;IP privada automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=18;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="294" y="490" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_ec2-a-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2;arcSize=7;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="216" y="685" width="328" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="icon_ec2-a-2" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="234" y="703" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="text_ec2-a-2" value="&lt;b style='font-size:18px'&gt;ec2-a-2&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:12px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:10px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;IP privada automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=18;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="294" y="695" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_A_count" value="2 instancias EC2" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#156939;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="888" width="200" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_B" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E7F7EE;strokeColor=#1F8A4C;strokeWidth=1.8;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="375" width="360" height="550" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_B_label" value="&lt;b style='font-size:19px'&gt;Subred B&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:14px'&gt;10.0.30.0/23&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px'&gt;512 direcciones · 507 usables&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=19;fontColor=#156939;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="387" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_B_badge" value="2 EC2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F8A4C;strokeColor=#1F8A4C;fontColor=#FFFFFF;fontStyle=1;fontSize=10;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="905" y="393" width="55" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_ec2-b-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2;arcSize=7;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="636" y="480" width="328" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="icon_ec2-b-1" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="654" y="498" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="text_ec2-b-1" value="&lt;b style='font-size:18px'&gt;ec2-b-1&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:12px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:10px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;IP privada automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=18;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="714" y="490" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_ec2-b-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2;arcSize=7;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="636" y="685" width="328" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="icon_ec2-b-2" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="654" y="703" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="text_ec2-b-2" value="&lt;b style='font-size:18px'&gt;ec2-b-2&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:12px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:10px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;IP privada automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=18;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="714" y="695" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_B_count" value="2 instancias EC2" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#156939;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="700" y="888" width="200" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_C" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E7F7EE;strokeColor=#1F8A4C;strokeWidth=1.8;arcSize=4;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="375" width="360" height="550" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_C_label" value="&lt;b style='font-size:19px'&gt;Subred C&lt;/b&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:14px'&gt;10.0.33.0/28&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px'&gt;16 direcciones · 11 usables&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=19;fontColor=#156939;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="387" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_C_badge" value="2 EC2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1F8A4C;strokeColor=#1F8A4C;fontColor=#FFFFFF;fontStyle=1;fontSize=10;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="393" width="55" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_ec2-c-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2;arcSize=7;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1056" y="480" width="328" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="icon_ec2-c-1" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="498" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="text_ec2-c-1" value="&lt;b style='font-size:18px'&gt;ec2-c-1&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:12px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:10px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;IP privada automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=18;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1134" y="490" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2_ec2-c-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=2;arcSize=7;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1056" y="685" width="328" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="icon_ec2-c-2" value="" style="shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;fillColor=#ED7100;strokeColor=#ffffff;sketch=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="703" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="text_ec2-c-2" value="&lt;b style='font-size:18px'&gt;ec2-c-2&lt;/b&gt;&lt;br&gt;&lt;b style='font-size:12px;color:#C46E00'&gt;t3.micro&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;Amazon Linux 2023&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span style='font-family:monospace;font-size:10px;color:#78541E'&gt;AMI ami-04b938437b69a2c9c&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:11px;color:#5A6B7B'&gt;IP privada automática&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;fontSize=18;fontColor=#16202A;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1134" y="695" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="subnet_C_count" value="2 instancias EC2" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#156939;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="888" width="200" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D9E2EC;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1075" width="1440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sw1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E3;strokeColor=#FF9900;strokeWidth=1.5;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="110" y="1091" width="28" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_t1" value="Creado por Terraform: VPC, 3 subredes, SG y 6 instancias EC2" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#16202A;fontFamily=Helvetica;fontStyle=0;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1091" width="520" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sw2" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=4 3;fillColor=#E7F7EE;strokeColor=#1F8A4C;strokeWidth=1.2;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="720" y="1091" width="28" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_t2" value="Subredes privadas: sin Internet Gateway" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#16202A;fontFamily=Helvetica;fontStyle=0;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1091" width="420" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_t3" value="6 EC2 · 2 por subred" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#C46E00;fontFamily=Helvetica;fontStyle=1;whiteSpace=wrap;spacing=0;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="1091" width="240" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
