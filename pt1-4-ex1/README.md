@@ -205,39 +205,6 @@ aws ec2 describe-instances \
   primeros 12 meses, pero dos instancias encendidas 24/7 pueden superar las 750
   horas mensuales gratuitas. Las IP públicas y los volúmenes EBS también pueden
   generar cargos.
-
-## Mejoras opcionales
-
-- **Evitar una AMI hardcodeada** con un `data source` que seleccione siempre la
-  última Amazon Linux 2023:
-
-  ```hcl
-  data "aws_ami" "al2023" {
-    most_recent = true
-    owners      = ["amazon"]
-
-    filter {
-      name   = "name"
-      values = ["al2023-ami-2023.*-x86_64"]
-    }
-
-    filter {
-      name   = "virtualization-type"
-      values = ["hvm"]
-    }
-  }
-  ```
-
-  Después, en cada `aws_instance`, se puede usar `ami = data.aws_ami.al2023.id`.
-
-- **Parametrizar** el tipo de instancia, la región y el número de instancias con
-  variables (`variable` + `terraform.tfvars`).
-- **Añadir outputs** con los IDs y las IPs públicas de las instancias.
-- **Crear una VPC propia** con subredes, tabla de rutas, IGW y grupo de seguridad,
-  en lugar de depender de la VPC por defecto.
-- **Fijar la versión del proveedor** con un bloque `required_providers` y un
-  `terraform.lock.hcl` versionado.
-
 ## Autor
 
 - **Moha591** — [github.com/Moha591](https://github.com/Moha591)
