@@ -10,105 +10,72 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 }
 
 # ---------------------------------------------------------------------------
-# VPC
+# Red
 # ---------------------------------------------------------------------------
 resource "aws_vpc" "this" {
-  cidr_block           = var.vpc_cidr
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-
-  tags = {
-    Name    = "pt1-4-ex2-vpc"
-    Project = "pt1-4-ex2"
-  }
+  cidr_block = "10.0.0.0/16"
 }
 
 # ---------------------------------------------------------------------------
-# Subredes privadas: las tres comparten la misma zona de disponibilidad
-# (us-east-1a). No se asigna IP pública automática.
+# Subredes
 # ---------------------------------------------------------------------------
-resource "aws_subnet" "this" {
-  for_each = var.subnets
+resource "aws_subnet" "a" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = "10.0.32.0/25"
+  availability_zone = "us-east-1a"
+}
 
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = each.value.cidr_block
-  availability_zone       = var.availability_zone
-  map_public_ip_on_launch = false
+resource "aws_subnet" "b" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = "10.0.30.0/23"
+  availability_zone = "us-east-1a"
+}
 
-  tags = {
-    Name    = "pt1-4-ex2-${each.value.name}"
-    Project = "pt1-4-ex2"
-    Subnet  = each.key
-  }
+resource "aws_subnet" "c" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = "10.0.33.0/28"
+  availability_zone = "us-east-1a"
 }
 
 # ---------------------------------------------------------------------------
-# Par de claves para futuras prácticas. La clave privada (labuser.pem) se
-# genera localmente y no se versiona; aquí solo se importa la clave pública.
+# Instancias EC2: 2 por subred
 # ---------------------------------------------------------------------------
-resource "aws_key_pair" "this" {
-  key_name   = var.key_name
-  public_key = file("${path.module}/labuser.pub")
-
-  tags = {
-    Name    = var.key_name
-    Project = "pt1-4-ex2"
-  }
+resource "aws_instance" "a1" {
+  ami           = "ami-04b938437b69a2c9c"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.a.id
 }
 
-# ---------------------------------------------------------------------------
-# Grupo de seguridad común a las 6 instancias.
-# Sin reglas de entrada: las instancias no son accesibles desde Internet.
-# ---------------------------------------------------------------------------
-resource "aws_security_group" "this" {
-  name        = "pt1-4-ex2-sg"
-  description = "Security group del ejercicio 2: sin reglas de entrada"
-  vpc_id      = aws_vpc.this.id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name    = "pt1-4-ex2-sg"
-    Project = "pt1-4-ex2"
-  }
+resource "aws_instance" "a2" {
+  ami           = "ami-04b938437b69a2c9c"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.a.id
 }
 
-# ---------------------------------------------------------------------------
-# 6 instancias EC2: 2 por cada subred, sin IP pública
-# ---------------------------------------------------------------------------
-locals {
-  instances = {
-    "ec2-a-1" = "A"
-    "ec2-a-2" = "A"
-    "ec2-b-1" = "B"
-    "ec2-b-2" = "B"
-    "ec2-c-1" = "C"
-    "ec2-c-2" = "C"
-  }
+resource "aws_instance" "b1" {
+  ami           = "ami-04b938437b69a2c9c"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.b.id
 }
 
-resource "aws_instance" "this" {
-  for_each = local.instances
+resource "aws_instance" "b2" {
+  ami           = "ami-04b938437b69a2c9c"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.b.id
+}
 
-  ami                         = var.ami_id
-  instance_type               = var.instance_type
-  subnet_id                   = aws_subnet.this[each.value].id
-  vpc_security_group_ids      = [aws_security_group.this.id]
-  key_name                    = aws_key_pair.this.key_name
-  associate_public_ip_address = false
+resource "aws_instance" "c1" {
+  ami           = "ami-04b938437b69a2c9c"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.c.id
+}
 
-  tags = {
-    Name    = "pt1-4-ex2-${each.key}"
-    Project = "pt1-4-ex2"
-    Subnet  = each.value
-  }
+resource "aws_instance" "c2" {
+  ami           = "ami-04b938437b69a2c9c"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.c.id
 }
