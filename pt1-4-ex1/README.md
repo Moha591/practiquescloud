@@ -42,11 +42,6 @@ Como `main.tf` no define ningún `subnet_id`, AWS coloca las instancias en una d
 subredes por defecto de la VPC. En el diagrama se muestra `us-east-1a` como ejemplo
 de zona de disponibilidad.
 
-> **Nota importante:** Terraform solo crea y gestiona las dos instancias EC2
-> (marcadas en naranja). La VPC, la subred, la tabla de rutas, el IGW y el grupo de
-> seguridad por defecto ya existen en la cuenta de AWS y no se definen en este
-> ejercicio. En el diagrama se representan con líneas discontinuas.
-
 El diagrama editable se encuentra en
 [`assets/topologia.drawio`](assets/topologia.drawio) y se ha exportado a
 [`assets/topologia.png`](assets/topologia.png).
@@ -91,25 +86,6 @@ resource "aws_instance" "instanciados" {
 }
 ```
 
-## Requisitos previos
-
-- [Terraform](https://developer.hashicorp.com/terraform/install) 1.3 o superior.
-- Una cuenta de AWS con una **VPC por defecto** creada en `us-east-1`.
-- Credenciales de AWS configuradas en el sistema. Las opciones habituales son:
-  - `aws configure` (perfil `default`), o
-  - las variables de entorno `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` y
-    `AWS_SESSION_TOKEN` (si se utiliza un entorno temporal).
-- Permisos de EC2 para crear, describir y destruir instancias, como
-  `ec2:RunInstances`, `ec2:DescribeInstances`, `ec2:TerminateInstances` y
-  `ec2:CreateTags`.
-
-Comprueba la identidad y la región antes de desplegar:
-
-```bash
-aws sts get-caller-identity
-aws configure get region
-```
-
 ## Despliegue
 
 Desde la carpeta del ejercicio:
@@ -146,19 +122,6 @@ terraform state list
 terraform show
 ```
 
-Con AWS CLI:
-
-```bash
-aws ec2 describe-instances \
-  --region us-east-1 \
-  --filters "Name=tag:Name,Values=instanciauno,instanciados" \
-  --query "Reservations[].Instances[].{Nombre:Tags[?Key=='Name']|[0].Value,ID:InstanceId,Estado:State.Name,IP:PublicIpAddress,Tipo:InstanceType" \
-  --output table
-```
-
-También se pueden consultar en la consola de AWS: **EC2 → Instancias**, filtrando
-por las etiquetas `Name = instanciauno` y `Name = instanciados`.
-
 ## Limpieza de recursos
 
 Para evitar cargos, destruye las instancias cuando termines:
@@ -167,45 +130,6 @@ Para evitar cargos, destruye las instancias cuando termines:
 terraform plan -destroy
 terraform destroy
 ```
-
-Confirma la destrucción escribiendo `yes`. Una vez finalizado, comprueba que ya no
-queda ninguna instancia con estas etiquetas:
-
-```bash
-aws ec2 describe-instances \
-  --region us-east-1 \
-  --filters "Name=tag:Name,Values=instanciauno,instanciados" \
-  --query "Reservations[].Instances[].State.Name"
-```
-
-## Decisiones técnicas y limitaciones
-
-- **Región única:** todo se despliega en `us-east-1` para simplificar el ejercicio
-  y coincidir con la AMI indicada.
-- **Sin par de claves:** no se ha definido `key_name`, por lo que no se puede
-  acceder por SSH a las instancias. Tampoco es necesario para el objetivo del
-  ejercicio, que es practicar la creación de recursos con Terraform.
-- **Grupo de seguridad por defecto:** no tiene reglas de entrada; el tráfico de
-  salida sí está permitido. Si se quisiera SSH, habría que crear un grupo de
-  seguridad con el puerto 22 abierto (mejor, limitado a una IP concreta) y un par
-  de claves.
-- **IP pública:** en la VPC por defecto, las subredes tienen activada por defecto la
-  asignación automática de IP pública, por lo que las instancias reciben una IP
-  pública. Esto no implica que sean accesibles, porque el grupo de seguridad bloquea
-  la entrada.
-- **AMI fijada:** el ID `ami-04b938437b69a2c9c` corresponde a una imagen de Amazon
-  Linux 2023 de `us-east-1`. Las AMI se van actualizando y el ID puede quedar
-  obsoleto. Si `terraform plan` devuelve `InvalidAMIID.NotFound`, hay que consultar
-  la AMI vigente.
-- **Estado local:** este ejercicio utiliza el estado local de Terraform
-  (`terraform.tfstate`). No se debe versionar porque puede contener información de
-  la cuenta. Para un entorno de equipo o producción se recomienda un backend
-  remoto, como S3 con bloqueo en DynamoDB.
-- **Coste:** `t3.micro` puede estar cubierto por el nivel gratuito durante los
-  primeros 12 meses, pero dos instancias encendidas 24/7 pueden superar las 750
-  horas mensuales gratuitas. Las IP públicas y los volúmenes EBS también pueden
-  generar cargos.
-## Autor
 
 - **Moha591** — [github.com/Moha591](https://github.com/Moha591)
 - Repositorio: [github.com/Moha591/practiquescloud](https://github.com/Moha591/practiquescloud)
