@@ -27,10 +27,10 @@ las siguientes características:
 La imagen muestra el camino del tráfico desde Internet hasta las dos instancias:
 
 1. **Internet** llega al **Internet Gateway (IGW)** de la VPC.
-2. El IGW está asociado a la **VPC por defecto** (`172.31.0.0/16`).
-3. La **tabla de rutas** envía el tráfico `0.0.0.0/0` hacia el IGW.
+2. El IGW está asociado a la **VPC por defecto** .
+3. La **tabla de rutas** envía el tráfico `0.0.0.0/0`.
 4. Las instancias se encuentran en la **subred pública por defecto**
-   (`172.31.0.0/20`, zona `us-east-1a`).
+   (, zona `us-east-1a`).
 5. El **grupo de seguridad por defecto** no tiene ninguna regla de entrada, pero
    permite todo el tráfico de salida.
 
