@@ -5,10 +5,6 @@
 Iniciarse en la Infraestructura como Código (IaC) con Terraform creando dos
 servidores EC2 en AWS de forma automatizada, reproducible y versionada.
 
-El ejercicio forma parte del repositorio
-[Moha591/practiquescloud](https://github.com/Moha591/practiquescloud/tree/main/pt1-4-ex1),
-dentro de la carpeta `pt1-4-ex1`.
-
 ## Descripción
 
 El archivo [`main.tf`](main.tf) define el proveedor de AWS y dos instancias EC2 con
@@ -26,7 +22,7 @@ las siguientes características:
 
 ## Topología de red
 
-![Topología de la red](assets/topologia.png)
+![Topología de la red](assets/diagrama.drewio)
 
 La imagen muestra el camino del tráfico desde Internet hasta las dos instancias:
 
