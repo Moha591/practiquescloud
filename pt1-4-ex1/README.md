@@ -22,7 +22,7 @@ las siguientes características:
 
 ## Topología de red
 
-![Topología de la red](assets/diagrama.drewio)
+![Topología de la red](assets/topologia.png)
 
 La imagen muestra el camino del tráfico desde Internet hasta las dos instancias:
 
