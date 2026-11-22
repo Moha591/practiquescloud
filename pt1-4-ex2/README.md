@@ -34,7 +34,7 @@ Todas las subredes pertenecen a la VPC `10.0.0.0/16` y están en `us-east-1a`.
 
 ## Topología
 
-![Topología de la VPC y las subredes](assets/topologia.drawio.png)
+![Topología de la VPC y las subredes](assets/topologia.drawio1.png)
 
 ## Despliegue manual en la consola de AWS
 
