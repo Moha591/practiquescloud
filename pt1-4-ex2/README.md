@@ -168,28 +168,28 @@ terraform apply tfplan
 
 Infraestructura desplegada y verificada en `us-east-1`.
 
-| Recurso | ID |
-|---|---|
-| VPC | `vpc-0bddadd7f1bbffc4a` |
+| Recurso | Nombre | ID |
+|---|---|---|
+| VPC | `pt1-4-ex2-vpc` | `vpc-0cfbacb6bd6ebf4a6` |
 
 Subredes:
 
-| Subred | CIDR | ID |
-|---|---|---|
-| A | `10.0.32.0/25` | `subnet-0483cccb507b97227` |
-| B | `10.0.30.0/23` | `subnet-0262e3512fb34f972` |
-| C | `10.0.33.0/28` | `subnet-0dbcb961d246c4b5b` |
+| Subred | Nombre | CIDR | ID |
+|---|---|---|---|
+| A | `pt1-4-ex2-subnet-a` | `10.0.32.0/25` | `subnet-0329d8c45f27cc31c` |
+| B | `pt1-4-ex2-subnet-b` | `10.0.30.0/23` | `subnet-04d84d688d2312da2` |
+| C | `pt1-4-ex2-subnet-c` | `10.0.33.0/28` | `subnet-06f850286ccda2365` |
 
 Instancias:
 
-| Instancia | Subred | ID | IP privada | IP pública | Estado |
-|---|---|---|---|---|---|
-| `a1` | A | `i-0ab9af89cad710b83` | `10.0.32.37` | — | `running` |
-| `a2` | A | `i-019078f463905170c` | `10.0.32.74` | — | `running` |
-| `b1` | B | `i-0721fd1675cafa8eb` | `10.0.31.65` | — | `running` |
-| `b2` | B | `i-0b2b9f3a2a9a1e593` | `10.0.30.113` | — | `running` |
-| `c1` | C | `i-0dba10fa401739e69` | `10.0.33.5` | — | `running` |
-| `c2` | C | `i-097fa8b27d86cfc00` | `10.0.33.10` | — | `running` |
+| Instancia | Nombre | Subred | ID | IP privada | IP pública | Estado |
+|---|---|---|---|---|---|---|
+| `a1` | `pt1-4-ex2-a1` | A | `i-0893af5c168db6d55` | `10.0.32.64` | — | `running` |
+| `a2` | `pt1-4-ex2-a2` | A | `i-0d6d9d130c17fdbde` | `10.0.32.8` | — | `running` |
+| `b1` | `pt1-4-ex2-b1` | B | `i-0fb6b5ed1249ace9e` | `10.0.31.79` | — | `running` |
+| `b2` | `pt1-4-ex2-b2` | B | `i-03ee60275e1f906d0` | `10.0.31.215` | — | `running` |
+| `c1` | `pt1-4-ex2-c1` | C | `i-040cef3f6109ed53b` | `10.0.33.8` | — | `running` |
+| `c2` | `pt1-4-ex2-c2` | C | `i-0174eaefdcfe5d725` | `10.0.33.7` | — | `running` |
 
 Comprobaciones realizadas:
 
@@ -199,12 +199,21 @@ Comprobaciones realizadas:
 - Las 6 instancias en `running` y con los chequeos `2/2` en `ok`.
 - Ninguna instancia tiene IP pública.
 - Las 6 instancias usan `t3.micro` y la AMI `ami-04b938437b69a2c9c`.
+- Todos los recursos tienen etiqueta `Name`.
+
+### Capturas del despliegue con Terraform
+
+![VPC del despliegue Terraform](assets/vpc_teraform.png)
+
+![Subredes del despliegue Terraform](assets/subnet_teraform.png)
+
+![Instancias EC2 en ejecución](assets/instancias_teraform.png)
 
 ## Verificación
 
 Desde la consola de AWS:
 
-- **VPC → Your VPCs** para ver `vpc-0bddadd7f1bbffc4a` con CIDR `10.0.0.0/16`.
+- **VPC → Your VPCs** para ver `pt1-4-ex2-vpc` con CIDR `10.0.0.0/16`.
 - **VPC → Subnets** para ver las tres subredes con sus CIDR y
   `Auto-assign public IPv4 = Disable`.
 - **EC2 → Instances** para ver las seis instancias en estado `running`, cada una en
@@ -215,7 +224,7 @@ Desde la terminal, la comprobación se puede repetir con AWS CLI:
 ```bash
 aws ec2 describe-instances \
   --region us-east-1 \
-  --filters "Name=vpc-id,Values=vpc-0bddadd7f1bbffc4a" \
+  --filters "Name=vpc-id,Values=vpc-0cfbacb6bd6ebf4a6" \
   --query "Reservations[].Instances[].{ID:InstanceId,Estado:State.Name,Tipo:InstanceType,Subred:SubnetId,IPPrivada:PrivateIpAddress,IPPublica:PublicIpAddress}" \
   --output table
 ```
