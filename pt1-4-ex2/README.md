@@ -96,7 +96,7 @@ Ir a **EC2 → Instances → Launch instances**. Como ejemplo se muestra el proc
 completo para crear la primera instancia (`a1`); el resto (`a2`, `b1`, `b2`, `c1`,
 `c2`) siguen exactamente los mismos pasos, cambiando solo el nombre y la subred.
 
-**Parte 1 — Configuración inicial:**
+**Parte 1 — Configuración inicial de la instancia `pt1-4-ex2-a1`:**
 
 - Nombre: `pt1-4-ex2-a1`.
 - AMI: **Amazon Linux 2023 (x86_64)**.
@@ -105,14 +105,14 @@ completo para crear la primera instancia (`a1`); el resto (`a2`, `b1`, `b2`, `c1
 - Red: VPC `pt1-4-ex2-vpc` y subred `pt1-4-ex2-subnet-a`.
 - **No** marcar la opción de asignar IP pública (subred privada).
 
-![Creación de la instancia a1 — parte 1](assets/maquina_a1_manual_parte1.png)
+![Creación de la instancia pt1-4-ex2-a1 — parte 1](assets/maquina_a1_manual_parte1.png)
 
-**Parte 2 — Revisión y lanzamiento:**
+**Parte 2 — Revisión y lanzamiento de la instancia `pt1-4-ex2-a1`:**
 
 - Revisar el resumen de configuración.
 - Pulsar **Launch instance**.
 
-![Creación de la instancia a1 — parte 2](assets/maquina_a1_manual_parte2.png)
+![Creación de la instancia pt1-4-ex2-a1 — parte 2](assets/maquina_a1_manual_parte2.png)
 
 Una vez creada la primera, se repite el proceso para las otras cinco instancias,
 asignando a cada una su subred correspondiente:
@@ -128,15 +128,27 @@ asignando a cada una su subred correspondiente:
 
 Detalle de cada instancia creada:
 
+**Instancia `pt1-4-ex2-a1`** (subred `pt1-4-ex2-subnet-a`)
+
 ![Instancia pt1-4-ex2-a1](assets/maquina_a1_manual.png)
+
+**Instancia `pt1-4-ex2-a2`** (subred `pt1-4-ex2-subnet-a`)
 
 ![Instancia pt1-4-ex2-a2](assets/maquina_a2_manual.png)
 
+**Instancia `pt1-4-ex2-b1`** (subred `pt1-4-ex2-subnet-b`)
+
 ![Instancia pt1-4-ex2-b1](assets/maquina_b1_manual.png)
+
+**Instancia `pt1-4-ex2-b2`** (subred `pt1-4-ex2-subnet-b`)
 
 ![Instancia pt1-4-ex2-b2](assets/maquina_b2_manual.png)
 
+**Instancia `pt1-4-ex2-c1`** (subred `pt1-4-ex2-subnet-c`)
+
 ![Instancia pt1-4-ex2-c1](assets/maquina_c1_manual.png)
+
+**Instancia `pt1-4-ex2-c2`** (subred `pt1-4-ex2-subnet-c`)
 
 ![Instancia pt1-4-ex2-c2](assets/maquina_c2_manual.png)
 
