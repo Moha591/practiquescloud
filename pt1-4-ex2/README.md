@@ -38,7 +38,7 @@ Todas las subredes pertenecen a la VPC `10.0.0.0/16` y están en `us-east-1a`.
 
 El diagrama editable se encuentra en
 [`assets/topologia.drawio`](assets/topologia.drawio) y se ha exportado a
-[`assets/topologia.png`](assets/topologia.png).
+[`assets/topologia.drawio.png`](assets/topologia.drawio.png).
 
 ## Parte A — Diseño de la red
 
@@ -56,53 +56,103 @@ La infraestructura se ha diseñado con estos criterios:
 ## Parte B — Despliegue manual en la consola de AWS
 
 El despliegue manual se realiza **íntegramente desde la consola de AWS**, sin
-utilizar la terminal. Los pasos son:
+utilizar la terminal.
 
-1. **Crear la VPC**
-   - Ir a **VPC → Your VPCs → Create VPC**.
-   - Nombre: `pt1-4-ex2-vpc`.
-   - Bloque IPv4 CIDR: `10.0.0.0/16`.
-   - Sin subredes automáticas, sin Internet Gateway.
-   - Pulsar **Create VPC**.
+### 1. Crear la VPC
 
-2. **Crear las subredes**
-   - Ir a **VPC → Subnets → Create subnet**.
-   - Seleccionar la VPC `pt1-4-ex2-vpc`.
-   - Crear tres subredes, todas en la zona `us-east-1a`:
-     - `pt1-4-ex2-subnet-a` → `10.0.32.0/25`
-     - `pt1-4-ex2-subnet-b` → `10.0.30.0/23`
-     - `pt1-4-ex2-subnet-c` → `10.0.33.0/28`
-   - En **Actions → Modify auto-assign IP settings** de cada subred, dejar
-     **Auto-assign public IPv4 = Disable** (son subredes privadas).
+Ir a **VPC → Your VPCs → Create VPC**:
 
-3. **Lanzar las instancias EC2**
-   - Ir a **EC2 → Instances → Launch instances**.
-   - Nombre: `a1` (y repetir con `a2`, `b1`, `b2`, `c1`, `c2`).
-   - AMI: **Amazon Linux 2023 (x86_64)**.
-   - Tipo de instancia: `t3.micro`.
-   - En **Network settings**, seleccionar la VPC `pt1-4-ex2-vpc` y la subred
-     correspondiente (`pt1-4-ex2-subnet-a`, `b` o `c`).
-   - **No** marcar la opción de asignar IP pública (no hay `subnet_id` con IP
-     pública automática).
-   - Pulsar **Launch instance** y repetir hasta tener 6 instancias, dos por subred.
+- Nombre: `pt1-4-ex2-vpc`.
+- Bloque IPv4 CIDR: `10.0.0.0/16`.
+- Sin subredes automáticas, sin Internet Gateway.
 
-4. **Comprobar el estado**
-   - En **EC2 → Instances**, verificar que las seis instancias están en estado
-     `Running`, con IP privada dentro del rango de su subred y **sin IP pública**.
+![VPC creada en la consola de AWS](assets/tabala_vpc_manual.png)
 
-5. **Comprobar la red**
-   - En **VPC → Your VPCs** aparece `pt1-4-ex2-vpc` con CIDR `10.0.0.0/16`.
-   - En **VPC → Subnets** aparecen las tres subredes con los CIDR indicados y
-     `Auto-assign public IPv4 = Disable`.
+### 2. Crear las subredes
+
+Ir a **VPC → Subnets → Create subnet**, seleccionar la VPC `pt1-4-ex2-vpc` y crear
+tres subredes en la zona `us-east-1a`:
+
+- `pt1-4-ex2-subnet-a` → `10.0.32.0/25`
+- `pt1-4-ex2-subnet-b` → `10.0.30.0/23`
+- `pt1-4-ex2-subnet-c` → `10.0.33.0/28`
+
+En **Actions → Modify auto-assign IP settings** de cada subred, dejar
+**Auto-assign public IPv4 = Disable** (son subredes privadas).
+
+![Listado de subredes creadas](assets/tabla_subnet_manual.png)
+
+Detalle de cada subred:
+
+![Subred A](assets/subnetA_manual.png)
+
+![Subred B](assets/subnetB_manual.png)
+
+![Subred C](assets/subnetC_manual.png)
+
+### 3. Lanzar las instancias EC2
+
+Ir a **EC2 → Instances → Launch instances**. Como ejemplo se muestra el proceso
+completo para crear la primera instancia (`a1`); el resto (`a2`, `b1`, `b2`, `c1`,
+`c2`) siguen exactamente los mismos pasos, cambiando solo el nombre y la subred.
+
+**Parte 1 — Configuración inicial:**
+
+- Nombre: `pt1-4-ex2-a1`.
+- AMI: **Amazon Linux 2023 (x86_64)**.
+- Tipo de instancia: `t3.micro`.
+- Par de claves: el disponible en el laboratorio (`vockey`).
+- Red: VPC `pt1-4-ex2-vpc` y subred `pt1-4-ex2-subnet-a`.
+- **No** marcar la opción de asignar IP pública (subred privada).
+
+![Creación de la instancia a1 — parte 1](assets/maquina_a1_manual_parte1.png)
+
+**Parte 2 — Revisión y lanzamiento:**
+
+- Revisar el resumen de configuración.
+- Pulsar **Launch instance**.
+
+![Creación de la instancia a1 — parte 2](assets/maquina_a1_manual_parte2.png)
+
+Una vez creada la primera, se repite el proceso para las otras cinco instancias,
+asignando a cada una su subred correspondiente:
+
+| Instancia | Subred |
+|---|---|
+| `pt1-4-ex2-a1` | `pt1-4-ex2-subnet-a` |
+| `pt1-4-ex2-a2` | `pt1-4-ex2-subnet-a` |
+| `pt1-4-ex2-b1` | `pt1-4-ex2-subnet-b` |
+| `pt1-4-ex2-b2` | `pt1-4-ex2-subnet-b` |
+| `pt1-4-ex2-c1` | `pt1-4-ex2-subnet-c` |
+| `pt1-4-ex2-c2` | `pt1-4-ex2-subnet-c` |
+
+Detalle de cada instancia creada:
+
+![Instancia pt1-4-ex2-a1](assets/maquina_a1_manual.png)
+
+![Instancia pt1-4-ex2-a2](assets/maquina_a2_manual.png)
+
+![Instancia pt1-4-ex2-b1](assets/maquina_b1_manual.png)
+
+![Instancia pt1-4-ex2-b2](assets/maquina_b2_manual.png)
+
+![Instancia pt1-4-ex2-c1](assets/maquina_c1_manual.png)
+
+![Instancia pt1-4-ex2-c2](assets/maquina_c2_manual.png)
+
+### 4. Comprobar el resultado
+
+En **EC2 → Instances** se verifica que las seis instancias están en estado
+`Running`, cada una en su subred, con IP privada dentro del rango de su subred y
+**sin IP pública**.
+
+![Listado de las seis instancias en ejecución](assets/tabla_instancias_manual.png)
+
+En **VPC → Your VPCs** y **VPC → Subnets** se comprueba que la VPC y las tres
+subredes existen con los CIDR indicados y `Auto-assign public IPv4 = Disable`.
 
 > En la consola de AWS no se crean recursos por terminal. Los pasos anteriores
 > describen únicamente acciones de la interfaz web de AWS.
-
-### Capturas del despliegue manual
-
-![Resumen de la VPC y las subredes](assets/vpc_subnets.png)
-
-![Inventario de las instancias EC2](assets/ec2_instances.png)
 
 ## Parte C — Despliegue con Terraform
 
@@ -112,9 +162,10 @@ utilizar la terminal. Los pasos son:
 pt1-4-ex2/
 ├── assets/
 │   ├── topologia.drawio
-│   ├── topologia.png
-│   ├── vpc_subnets.png
-│   └── ec2_instances.png
+│   ├── topologia.drawio.png
+│   ├── vpc_teraform.png
+│   ├── subnet_teraform.png
+│   └── instancias_teraform.png
 ├── main.tf
 └── README.md
 ```
