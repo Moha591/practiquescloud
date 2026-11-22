@@ -134,7 +134,4 @@ Detalle de `ec2-b`:
 
 ![Detalle de la instancia ec2-b](assets/ec2_instances_ec2-b.png)
 
-  excluidos por `.gitignore`.
-- La infraestructura ya está desplegada y verificada. Las credenciales de AWS Academy
-  son temporales: si caducan, hay que volver a copiarlas desde el Learner Lab.
-- Ejecutar `terraform destroy` cuando se terminen las capturas para evitar cargos.
+
