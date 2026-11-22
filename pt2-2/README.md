@@ -51,14 +51,6 @@ pt2-2/
 └── versions.tf              # Versión de Terraform y proveedor AWS
 ```
 
-## Requisitos previos
-
-- Terraform `>= 1.3.0`.
-- Credenciales de AWS configuradas (por ejemplo, AWS Academy Learner Lab).
-- Par de claves `vockey` disponible en `us-east-1`.
-- La AMI usada es `ami-0aacbf72109c53c0c` (Amazon Linux, `us-east-1`). Se puede
-  cambiar con la variable `ami_id`.
-
 ## Despliegue
 
 Desde la carpeta `pt2-2`:
@@ -84,79 +76,6 @@ terraform apply tfplan
 terraform output
 ```
 
-Si la infraestructura ya está creada, `terraform apply` terminará con
-`No changes`. Para volver a crearla desde cero:
-
-```bash
-terraform destroy -auto-approve
-terraform apply -auto-approve
-```
-
-También se puede aplicar sin guardar el plan previamente:
-
-```bash
-terraform apply -auto-approve
-```
-
-Si se quieren cambiar valores (región, CIDR, tipo de instancia, etc.), copiar el
-archivo de ejemplo y editarlo:
-
-```bash
-cp terraform.tfvars.example terraform.tfvars
-```
-
-## Verificación
-
-Consultar las salidas de Terraform:
-
-```bash
-terraform output
-```
-
-Comprobar los recursos con AWS CLI:
-
-```bash
-# VPC
-aws ec2 describe-vpcs \
-  --filters "Name=tag:Name,Values=VPC-03" \
-  --query "Vpcs[].{ID:VpcId,CIDR:CidrBlock,Estado:State}" \
-  --output table
-
-# Subredes
-aws ec2 describe-subnets \
-  --filters "Name=vpc-id,Values=$(terraform output -raw vpc_id)" \
-  --query "Subnets[].{ID:SubnetId,Nombre:Tags[?Key=='Name']|[0].Value,CIDR:CidrBlock,AZ:AvailabilityZone,IPPublica:MapPublicIpOnLaunch}" \
-  --output table
-
-# Instancias
-aws ec2 describe-instances \
-  --filters "Name=instance-state-name,Values=running" \
-  --query "Reservations[].Instances[].{ID:InstanceId,Nombre:Tags[?Key=='Name']|[0].Value,Tipo:InstanceType,Subred:SubnetId,IPPublica:PublicIpAddress,Clave:KeyName}" \
-  --output table
-
-# Security Group
-aws ec2 describe-security-groups \
-  --group-ids "$(terraform output -raw security_group_id)" \
-  --query "SecurityGroups[].IpPermissions" \
-  --output json
-```
-
-También se puede comprobar desde la consola de AWS:
-
-- **VPC → Your VPCs** para ver `VPC-03`.
-- **VPC → Subnets** para ver `Public Subnet A` y `Public Subnet B`.
-- **VPC → Internet gateways** para ver `VPC-03-igw`.
-- **VPC → Route tables** para ver `VPC-03-public-rtb` y sus asociaciones.
-- **EC2 → Security Groups** para ver `VPC-03-sg`.
-- **EC2 → Instances** para ver `ec2-a` y `ec2-b` en estado `running`.
-
-Prueba de conectividad (cuando las instancias estén en ejecución):
-
-```bash
-ping <IP_PUBLICA_EC2_A>
-ssh -i vockey.pem ec2-user@<IP_PUBLICA_EC2_A>
-```
-
 ## Resultados del despliegue
 
 Infraestructura desplegada y verificada en `us-east-1`:
@@ -174,16 +93,6 @@ Infraestructura desplegada y verificada en `us-east-1`:
 |---|---|---|---|---|---|---|
 | `ec2-a` | `i-08fbb1f8221b3fe93` | Public Subnet A | `us-east-1a` | `10.0.1.10` | `44.211.204.234` | `running` |
 | `ec2-b` | `i-07619ae4525dd1106` | Public Subnet B | `us-east-1b` | `10.0.2.250` | `3.91.189.70` | `running` |
-
-Comprobaciones realizadas:
-
-- `terraform validate` correcto.
-- `terraform apply` completado: **10 recursos creados**.
-- `terraform plan` posterior: **sin cambios** (infraestructura idempotente).
-- Las dos instancias tienen los chequeos `2/2` en estado `ok`.
-- Las dos instancias usan `t3.micro`, `vockey` y `VPC-03-sg`.
-- El puerto `22/TCP` responde en las dos IPs públicas.
-- Las pestañas de la consola de AWS muestran los recursos tras refrescar.
 
 ## Capturas de la infraestructura
 
@@ -225,26 +134,6 @@ Detalle de `ec2-b`:
 
 ![Detalle de la instancia ec2-b](assets/ec2_instances_ec2-b.png)
 
-## Limpieza de recursos
-
-Para evitar cargos, destruir toda la infraestructura al terminar:
-
-```bash
-terraform plan -destroy
-terraform destroy
-```
-
-El `destroy` elimina las dos instancias, el Security Group, la tabla de rutas, el
-Internet Gateway, las subredes y la VPC.
-
-## Notas
-
-- Las dos subredes tienen `map_public_ip_on_launch = true`, por lo que las instancias
-  reciben IP pública automáticamente.
-- Las instancias usan la clave `vockey`, disponible en los entornos de AWS Academy.
-- El Security Group permite ICMP únicamente desde `10.0.0.0/16`; no se abre ICMP a
-  Internet.
-- El estado de Terraform (`terraform.tfstate`) y los archivos `*.tfvars` están
   excluidos por `.gitignore`.
 - La infraestructura ya está desplegada y verificada. Las credenciales de AWS Academy
   son temporales: si caducan, hay que volver a copiarlas desde el Learner Lab.
