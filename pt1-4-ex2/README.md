@@ -49,6 +49,8 @@ Ir a **VPC → Your VPCs → Create VPC**:
 - Bloque IPv4 CIDR: `10.0.0.0/16`.
 - Sin subredes automáticas, sin Internet Gateway.
 
+![Creación de la VPC en la consola de AWS](assets/creacion_vpc_manual.png)
+
 ![VPC creada en la consola de AWS](assets/tabala_vpc_manual.png)
 
 ### 2. Crear las subredes
