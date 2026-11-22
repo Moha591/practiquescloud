@@ -307,21 +307,3 @@ terraform apply tfplan
 
 ![Instancias EC2 en ejecución](assets/instancias_teraform.png)
 
-## Limpieza de recursos
-
-Para evitar cargos, se puede destruir toda la infraestructura:
-
-```bash
-terraform plan -destroy
-terraform destroy
-```
-
-El `destroy` elimina las seis instancias, las subredes y la VPC.
-
-
-## Conclusión
-
-El despliegue manual permite entender la creación de cada recurso desde la consola,
-mientras que Terraform permite reproducir la misma infraestructura de forma más
-rápida y controlada. La VPC queda segmentada en tres subredes dentro de la misma zona
-de disponibilidad, con dos instancias EC2 en cada una y sin exposición pública.
