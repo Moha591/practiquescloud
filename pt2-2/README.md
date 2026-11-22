@@ -129,6 +129,34 @@ ping <IP_PUBLICA_EC2_A>
 ssh -i vockey.pem ec2-user@<IP_PUBLICA_EC2_A>
 ```
 
+## Resultados del despliegue
+
+Infraestructura desplegada y verificada en `us-east-1`:
+
+| Recurso | ID | Detalle |
+|---|---|---|
+| VPC | `vpc-09ea57c50bffea529` | `VPC-03`, `10.0.0.0/16` |
+| Public Subnet A | `subnet-0aef5b35b00bf8035` | `10.0.1.0/24`, `us-east-1a` |
+| Public Subnet B | `subnet-0b4c09a2ae0ffa3d6` | `10.0.2.0/24`, `us-east-1b` |
+| Internet Gateway | `igw-03f7436fe9f7fd85d` | Asociado a `VPC-03` |
+| Tabla de rutas | `rtb-031727d73c7334119` | `0.0.0.0/0` → IGW |
+| Security Group | `sg-0430004f268c5fcfb` | `VPC-03-sg` |
+
+| Instancia | ID | Subred | AZ | IP privada | IP pública | Estado |
+|---|---|---|---|---|---|---|
+| `ec2-a` | `i-08fbb1f8221b3fe93` | Public Subnet A | `us-east-1a` | `10.0.1.10` | `44.211.204.234` | `running` |
+| `ec2-b` | `i-07619ae4525dd1106` | Public Subnet B | `us-east-1b` | `10.0.2.250` | `3.91.189.70` | `running` |
+
+Comprobaciones realizadas:
+
+- `terraform validate` correcto.
+- `terraform apply` completado: **10 recursos creados**.
+- `terraform plan` posterior: **sin cambios** (infraestructura idempotente).
+- Las dos instancias tienen los chequeos `2/2` en estado `ok`.
+- Las dos instancias usan `t3.micro`, `vockey` y `VPC-03-sg`.
+- El puerto `22/TCP` responde en las dos IPs públicas.
+- Las pestañas de la consola de AWS muestran los recursos tras refrescar.
+
 ## Capturas para la memoria
 
 Guardar en `assets/` las imágenes solicitadas en la entrega:
@@ -161,5 +189,6 @@ Internet Gateway, las subredes y la VPC.
   Internet.
 - El estado de Terraform (`terraform.tfstate`) y los archivos `*.tfvars` están
   excluidos por `.gitignore`.
-- No se ha ejecutado `terraform apply`: esta carpeta contiene únicamente el código y
-  la documentación preparados para el despliegue.
+- La infraestructura ya está desplegada y verificada. Las credenciales de AWS Academy
+  son temporales: si caducan, hay que volver a copiarlas desde el Learner Lab.
+- Ejecutar `terraform destroy` cuando se terminen las capturas para evitar cargos.
