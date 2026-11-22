@@ -36,24 +36,7 @@ Todas las subredes pertenecen a la VPC `10.0.0.0/16` y están en `us-east-1a`.
 
 ![Topología de la VPC y las subredes](assets/topologia.drawio.png)
 
-El diagrama editable se encuentra en
-[`assets/topologia.drawio`](assets/topologia.drawio) y se ha exportado a
-[`assets/topologia.drawio.png`](assets/topologia.drawio.png).
-
-## Parte A — Diseño de la red
-
-La infraestructura se ha diseñado con estos criterios:
-
-- Una VPC principal con bloque `10.0.0.0/16`.
-- Tres subredes de tamaños diferentes para practicar el cálculo de CIDR.
-- Las tres subredes en la misma zona de disponibilidad (`us-east-1a`).
-- Dos instancias EC2 por subred, con un total de seis.
-- Sin solapamientos entre subredes.
-- Sin IP pública en las instancias.
-- Sin Internet Gateway ni tabla de rutas pública.
-- Sin reglas de entrada SSH.
-
-## Parte B — Despliegue manual en la consola de AWS
+## Despliegue manual en la consola de AWS
 
 El despliegue manual se realiza **íntegramente desde la consola de AWS**, sin
 utilizar la terminal.
@@ -160,13 +143,7 @@ En **EC2 → Instances** se verifica que las seis instancias están en estado
 
 ![Listado de las seis instancias en ejecución](assets/tabla_instancias_manual.png)
 
-En **VPC → Your VPCs** y **VPC → Subnets** se comprueba que la VPC y las tres
-subredes existen con los CIDR indicados y `Auto-assign public IPv4 = Disable`.
-
-> En la consola de AWS no se crean recursos por terminal. Los pasos anteriores
-> describen únicamente acciones de la interfaz web de AWS.
-
-## Parte C — Despliegue con Terraform
+## Despliegue con Terraform
 
 ### Estructura del proyecto
 
@@ -213,10 +190,6 @@ El resto de subredes e instancias siguen el mismo patrón:
 | `b1`, `b2` | Subred B |
 | `c1`, `c2` | Subred C |
 
-El enunciado menciona `main.tf`, `variables.tf`, etc. En esta entrega se ha mantenido
-un único `main.tf` con valores explícitos, sin variables ni outputs, para respetar el
-alcance mínimo solicitado.
-
 ### Despliegue
 
 ```bash
@@ -229,41 +202,6 @@ terraform apply tfplan
 
 ## Resultados del despliegue Terraform
 
-Infraestructura desplegada y verificada en `us-east-1`.
-
-| Recurso | Nombre | ID |
-|---|---|---|
-| VPC | `pt1-4-ex2-vpc` | `vpc-0cfbacb6bd6ebf4a6` |
-
-Subredes:
-
-| Subred | Nombre | CIDR | ID |
-|---|---|---|---|
-| A | `pt1-4-ex2-subnet-a` | `10.0.32.0/25` | `subnet-0329d8c45f27cc31c` |
-| B | `pt1-4-ex2-subnet-b` | `10.0.30.0/23` | `subnet-04d84d688d2312da2` |
-| C | `pt1-4-ex2-subnet-c` | `10.0.33.0/28` | `subnet-06f850286ccda2365` |
-
-Instancias:
-
-| Instancia | Nombre | Subred | ID | IP privada | IP pública | Estado |
-|---|---|---|---|---|---|---|
-| `a1` | `pt1-4-ex2-a1` | A | `i-0893af5c168db6d55` | `10.0.32.64` | — | `running` |
-| `a2` | `pt1-4-ex2-a2` | A | `i-0d6d9d130c17fdbde` | `10.0.32.8` | — | `running` |
-| `b1` | `pt1-4-ex2-b1` | B | `i-0fb6b5ed1249ace9e` | `10.0.31.79` | — | `running` |
-| `b2` | `pt1-4-ex2-b2` | B | `i-03ee60275e1f906d0` | `10.0.31.215` | — | `running` |
-| `c1` | `pt1-4-ex2-c1` | C | `i-040cef3f6109ed53b` | `10.0.33.8` | — | `running` |
-| `c2` | `pt1-4-ex2-c2` | C | `i-0174eaefdcfe5d725` | `10.0.33.7` | — | `running` |
-
-Comprobaciones realizadas:
-
-- `terraform validate` correcto.
-- `terraform apply` completado: **10 recursos creados**.
-- `terraform plan` posterior: **sin cambios** (infraestructura idempotente).
-- Las 6 instancias en `running` y con los chequeos `2/2` en `ok`.
-- Ninguna instancia tiene IP pública.
-- Las 6 instancias usan `t3.micro` y la AMI `ami-04b938437b69a2c9c`.
-- Todos los recursos tienen etiqueta `Name`.
-
 ### Capturas del despliegue con Terraform
 
 ![VPC del despliegue Terraform](assets/vpc_teraform.png)
@@ -271,37 +209,6 @@ Comprobaciones realizadas:
 ![Subredes del despliegue Terraform](assets/subnet_teraform.png)
 
 ![Instancias EC2 en ejecución](assets/instancias_teraform.png)
-
-## Verificación
-
-Desde la consola de AWS:
-
-- **VPC → Your VPCs** para ver `pt1-4-ex2-vpc` con CIDR `10.0.0.0/16`.
-- **VPC → Subnets** para ver las tres subredes con sus CIDR y
-  `Auto-assign public IPv4 = Disable`.
-- **EC2 → Instances** para ver las seis instancias en estado `running`, cada una en
-  su subred y sin IP pública.
-
-Desde la terminal, la comprobación se puede repetir con AWS CLI:
-
-```bash
-aws ec2 describe-instances \
-  --region us-east-1 \
-  --filters "Name=vpc-id,Values=vpc-0cfbacb6bd6ebf4a6" \
-  --query "Reservations[].Instances[].{ID:InstanceId,Estado:State.Name,Tipo:InstanceType,Subred:SubnetId,IPPrivada:PrivateIpAddress,IPPublica:PublicIpAddress}" \
-  --output table
-```
-
-## Comparación: consola vs. Terraform
-
-| Aspecto | Consola de AWS | Terraform |
-|---|---|---|
-| Velocidad inicial | Rápida para pocos recursos | Requiere escribir el código |
-| Reproducibilidad | Manual, depende de los pasos | Alta, el código se repite |
-| Errores humanos | Fáciles de cometer | Menores, validados con `plan` |
-| Versionado | No | Sí, en Git |
-| Cambios | Manuales | `terraform plan` + `apply` |
-| Eliminación | Manual, recurso a recurso | `terraform destroy` |
 
 ## Limpieza de recursos
 
@@ -314,19 +221,6 @@ terraform destroy
 
 El `destroy` elimina las seis instancias, las subredes y la VPC.
 
-## Decisiones y limitaciones
-
-- **Misma AZ:** las tres subredes están en `us-east-1a` para cumplir el enunciado.
-- **Subredes privadas:** no se declara Internet Gateway ni tabla de rutas pública.
-  Las instancias no tienen IP pública.
-- **Alcance mínimo:** Terraform crea únicamente la VPC, las tres subredes y las seis
-  instancias. No se declaran Security Groups, key pairs, variables ni outputs.
-- **AMI fijada:** el ID `ami-04b938437b69a2c9c` corresponde a una AMI de Amazon Linux
-  2023 de `us-east-1`. Si deja de estar disponible, hay que actualizar el ID.
-- **Estado local:** se utiliza `terraform.tfstate` local. No debe versionarse.
-- **Coste:** seis instancias `t3.micro` encendidas 24/7 pueden superar el nivel
-  gratuito. Hay que ejecutar `terraform destroy` al terminar.
-- **IPs privadas:** las IPs asignadas pueden cambiar si las instancias se recrean.
 
 ## Conclusión
 
