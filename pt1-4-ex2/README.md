@@ -287,15 +287,6 @@ resource "aws_instance" "c2" {
   }
 }
 ```
-
-El resto de subredes e instancias siguen el mismo patrón:
-
-| Instancia | Subred asignada |
-|---|---|
-| `a1`, `a2` | Subred A |
-| `b1`, `b2` | Subred B |
-| `c1`, `c2` | Subred C |
-
 ### Despliegue
 
 ```bash
