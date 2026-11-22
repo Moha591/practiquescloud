@@ -33,7 +33,15 @@ y dos instancias EC2, siguiendo los requisitos de la práctica **Pt2.2**.
 ```text
 pt2-2/
 ├── assets/
-│   └── .gitkeep
+│   ├── ec2_instances.png
+│   ├── ec2_instances_ec2-a.png
+│   ├── ec2_instances_ec2-b.png
+│   ├── igw.png
+│   ├── route_table_asociaciones.png
+│   ├── route_table_routes.png
+│   ├── security_group.png
+│   ├── subnet.png
+│   └── vpc.png
 ├── .gitignore
 ├── README.md
 ├── main.tf                  # VPC, subredes, IGW, RTB, SG e instancias EC2
@@ -56,6 +64,9 @@ pt2-2/
 Desde la carpeta `pt2-2`:
 
 ```bash
+cd /mnt/c/Users/marti/Desktop/Claud/practiquescloud/practiquescloud/pt2-2
+export PATH="$HOME/.local/bin:$HOME/.local/venvs/aws/bin:$PATH"
+
 # 1. Descargar el proveedor de AWS
 terraform init
 
@@ -68,6 +79,23 @@ terraform plan -out=tfplan
 
 # 4. Crear la infraestructura
 terraform apply tfplan
+
+# 5. Ver los IDs e IPs creados
+terraform output
+```
+
+Si la infraestructura ya está creada, `terraform apply` terminará con
+`No changes`. Para volver a crearla desde cero:
+
+```bash
+terraform destroy -auto-approve
+terraform apply -auto-approve
+```
+
+También se puede aplicar sin guardar el plan previamente:
+
+```bash
+terraform apply -auto-approve
 ```
 
 Si se quieren cambiar valores (región, CIDR, tipo de instancia, etc.), copiar el
@@ -157,16 +185,45 @@ Comprobaciones realizadas:
 - El puerto `22/TCP` responde en las dos IPs públicas.
 - Las pestañas de la consola de AWS muestran los recursos tras refrescar.
 
-## Capturas para la memoria
+## Capturas de la infraestructura
 
-Guardar en `assets/` las imágenes solicitadas en la entrega:
+### VPC
 
-| Archivo sugerido | Contenido |
-|---|---|
-| `assets/vpc_subnets.png` | VPC `VPC-03` y las dos subredes públicas |
-| `assets/igw_rtb.png` | Internet Gateway y tabla de rutas con `0.0.0.0/0` |
-| `assets/security_group.png` | Reglas de entrada y salida del Security Group |
-| `assets/ec2_instances.png` | `ec2-a` y `ec2-b` en ejecución con IP pública |
+![VPC-03 en la consola de AWS](assets/vpc.png)
+
+### Subredes públicas
+
+![Public Subnet A y Public Subnet B](assets/subnet.png)
+
+### Internet Gateway
+
+![Internet Gateway asociado a VPC-03](assets/igw.png)
+
+### Tabla de rutas
+
+Ruta por defecto hacia el Internet Gateway:
+
+![Ruta 0.0.0.0/0 hacia el IGW](assets/route_table_routes.png)
+
+Asociación de la tabla de rutas con las dos subredes:
+
+![Asociaciones de la tabla de rutas](assets/route_table_asociaciones.png)
+
+### Security Group
+
+![Reglas del Security Group VPC-03-sg](assets/security_group.png)
+
+### Instancias EC2
+
+![Instancias ec2-a y ec2-b en ejecución](assets/ec2_instances.png)
+
+Detalle de `ec2-a`:
+
+![Detalle de la instancia ec2-a](assets/ec2_instances_ec2-a.png)
+
+Detalle de `ec2-b`:
+
+![Detalle de la instancia ec2-b](assets/ec2_instances_ec2-b.png)
 
 ## Limpieza de recursos
 
