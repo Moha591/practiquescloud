@@ -56,9 +56,6 @@ pt2-2/
 Desde la carpeta `pt2-2`:
 
 ```bash
-cd /mnt/c/Users/marti/Desktop/Claud/practiquescloud/practiquescloud/pt2-2
-export PATH="$HOME/.local/bin:$HOME/.local/venvs/aws/bin:$PATH"
-
 # 1. Descargar el proveedor de AWS
 terraform init
 
